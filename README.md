@@ -4,7 +4,7 @@ The verification engineer will be given a spec, and they need to start working o
 ## Simple Athematic and Logic Unit Spec
 ![image](https://github.com/srsapireddy/UVM-Test-Bench-Environment-ALU/assets/32967087/d267b301-03f8-476a-ae27-b803ebf6832b)
 
-## testbench.sv
+## DUT: testbench.sv
 ```
 // ALU Verification
 // Date: October 2023
@@ -17,6 +17,7 @@ import uvm_pkg::*;
 // ----------------
 // Include Files
 // ----------------
+`include "interface.sv"
 
 module top;
   // ----------------
@@ -25,14 +26,18 @@ module top;
   
   logic clock;
   
+  // connecting the clock in the top module to the interface
+  // here we are passing the clock in the top module to the interface and from interface we are passing the clock to the DUT
+  alu_interface intf(.clock(clock));
+  
   alu dut(
-    .clock(),
-    .reset(),
-    .A(),
-    .B(),
-    .ALU_Sel(),
-    .ALU_Out(),
-    .CarryOut()
+    .clock(intf.clock),
+    .reset(intf.reset),
+    .A(intf.a),
+    .B(intf.b),
+    .ALU_Sel(intf.op_code),
+    .ALU_Out(intf.result),
+    .CarryOut(intf.carry_out)
   );
   
   initial begin
@@ -57,3 +62,26 @@ module top;
   
 endmodule: top
 ```
+
+## Interface: interface.sv
+```
+// clock is coming from top module so we have to define clock as a port
+interface alu_interface(input logic clock);
+    /*
+    .clock(),
+    .reset(),
+    .A(),
+    .B(),
+    .ALU_Sel(),
+    .ALU_Out(),
+    .CarryOut()
+    */
+  logic reset;
+  
+  logic [7:0] a, b;
+  logic [3:0] op_code; // select line
+  logic [7:0] result;  // output
+  bit carry_out;
+endinterface: alu_interface
+```
+
