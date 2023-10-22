@@ -192,7 +192,9 @@ endclass: alu_agent
 
 ## Driver Class: driver.sv
 ```
-class alu_driver extends uvm_driver;
+// driver class is a parameterized class so we need to pass the name of the sequence item class that we are going to use. And same for the sequencer class. So that the driver knows what type of sequence item we are going to drive on the sequencer and driver.
+
+class alu_driver extends uvm_driver#(alu_sequence_item);
   `uvm_component_utils(alu_driver)
   
   // constructor
@@ -262,7 +264,7 @@ endclass: alu_monitor
 
 ## Sequencer Class: sequencer.sv
 ```
-class alu_sequencer extends uvm_sequencer;
+class alu_sequencer extends uvm_sequencer#(alu_sequence_item);
   `uvm_component_utils(alu_monitor)
   
   // constructor
@@ -284,12 +286,6 @@ class alu_sequencer extends uvm_sequencer;
     `uvm_info("SEQR_CLASS", "Connect Phase!", UVM_HIGH)
   endfunction: connect_phase
   
-  // Run Phase
-  task run_phase(uvm_phase phase);
-    super.sun_phase(phase);
-    
-    // Run Phase Logic
-  endtask: run_phase
   
   // All the other phases are functions but the run phase is a task because run phase can consume time and it can have time consuming statements. And function cannot include any time consuming statements
 endclass: alu_sequencer
