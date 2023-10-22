@@ -85,3 +85,43 @@ interface alu_interface(input logic clock);
 endinterface: alu_interface
 ```
 
+## Test Class: test.sv
+```
+class alu_test extends uvm_test;
+  `uvm_component_utils(alu_test)
+  
+  // constructor
+  function new(string name = "alu_test", uvm_component parent);
+    super.new(name, parent);
+    `uvm_info("TEST_CLASS", "Inside Constructor!", UVM_HIGH)
+  endfunction: new
+  
+  // build phase
+  // here super will call the parent build phase method
+  function void build_phase(uvm_phase phase);
+    super.build_phase(phase);
+    `uvm_info("TEST_CLASS", "Build Phase!", UVM_HIGH)
+  endfunction: build_phase
+  
+  // Connect Phase
+  function void connect_phase(uvm_phase phase);
+    super.connect_phase(phase);
+    `uvm_info("TEST_CLASS", "Connect Phase!", UVM_HIGH)
+  endfunction: connect_phase
+  
+  // Run Phase
+  task run_phase(uvm_phase phase);
+    super.sun_phase(phase);
+    
+    // Run Phase Logic
+  endtask: run_phase
+  
+  // All the other phases are functions but the run phase is a task because run phase can consume time and it can have time consuming statements. And function cannot include any time consuming statements
+endclass: alu_test
+```
+
+## Environment Class: env.sv
+```
+
+```
+
