@@ -291,4 +291,45 @@ class alu_sequencer extends uvm_sequencer#(alu_sequence_item);
 endclass: alu_sequencer
 ```
 
+## Sequence Item: sequence_item.sv
+```
+// This is an object class and not a component class 
+
+class alu_sequence_item extends uvm_sequence_item;
+  `uvm_object_utils(alu_sequence_item);
+  
+  // Instantiation of variables and constructor
+  rand logic reset;
+  
+  rand logic [7:0] a, b;
+  rand logic [3:0] op_code; // select line
+  
+  logic [7:0] result;  // output
+  bit carry_out;	   // output
+  
+  function new(string name = "alu_sequence_item");
+    super.new(name);
+  endfunction: new
+endclass: alu_sequence_item
+```
+
+## Base Sequence Class: sequence.sv
+```
+// Object Class
+
+class alu_base_sequence extends uvm_sequence;
+  `uvm_object_utils(alu_base_sequence)
+  
+  function new();
+    super.new(name);
+    `uvm_info("BASE_SEQ", "Inside Constructor!", UVM_HIGH);
+  endfunction: new
+  
+  // what happens in the sequence class will be defined in the body class
+  task body();
+    `uvm_info("BASE_SEQ", "Inside Body Task!", UVM_HIGH);
+  endtask: body
+endclass: alu_base_sequence
+```
+
 
