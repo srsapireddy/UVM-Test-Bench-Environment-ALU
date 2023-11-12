@@ -1,8 +1,11 @@
 # UVM-Test-Bench-Environment-ALU
 The verification engineer will be given a spec, and they need to start working on the verification plan and testbench. 
 
+## ALU BLOCK DIAGRAM
+![image](https://github.com/srsapireddy/UVM-Test-Bench-Environment-ALU/assets/32967087/e7e16c1c-c24b-4008-b9b4-3fc044743ef7)
+
 ## Simple Athematic and Logic Unit Spec
-![image](https://github.com/srsapireddy/UVM-Test-Bench-Environment-ALU/assets/32967087/d267b301-03f8-476a-ae27-b803ebf6832b)
+![image](https://github.com/srsapireddy/UVM-Test-Bench-Environment-ALU/assets/32967087/f508a676-a9ac-4d2b-890d-162989cd5880)
 
 ## DUT: testbench.sv
 ```
