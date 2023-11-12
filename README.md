@@ -670,7 +670,7 @@ endclass: alu_sequence_item
 ```
 
 According to the block diagram the test component will contain the environment class. The environment will contain the Agent class. The agent will contain the driver and monitor and sequencer. We need to instantiate the class accordingly.
-
+# Time: 59:13
 
 
 
